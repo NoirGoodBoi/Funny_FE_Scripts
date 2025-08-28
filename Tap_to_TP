@@ -1,0 +1,15 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+local Tool = Instance.new("Tool")
+Tool.RequiresHandle = false
+Tool.Name = "TP"
+Tool.Parent = LocalPlayer.Backpack
+
+Tool.Activated:Connect(function()
+    local pos = Mouse.Hit + Vector3.new(0,3,0)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character:MoveTo(pos.Position)
+    end
+end)
