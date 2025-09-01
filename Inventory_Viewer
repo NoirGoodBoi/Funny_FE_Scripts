@@ -1,8 +1,11 @@
+
+--// services
 local ts = game:GetService("TweenService")
 local rs = game:GetService("RunService")
 local uis = game:GetService("UserInputService")
 local players = game:GetService("Players")
 
+--// config
 local lp = players.LocalPlayer
 if not lp then return end
 
@@ -18,12 +21,14 @@ local CONFIG = {
 	}
 }
 
+--// 'secret' state management
 _G.BillboardState = {
 	enabled = true,
 	uis = {}, -- { [Player]: { gui, root, main, currentState, tweens } }
 	activeScroller = nil
 }
 
+--// functions
 local function getPlayerPlatform(player)
 	local platform = "Unknown"
 	if player.GameplayPaused then platform = "Mobile" end
@@ -81,6 +86,7 @@ local function createElements(player)
 
 	local healthBar = Instance.new("Frame", state.main)
 	healthBar.Name = "HealthBar"
+	-- FIX: Positioned at the top center
 	healthBar.Size = UDim2.new(0.8, 0, 0, 8)
 	healthBar.Position = UDim2.new(0.5, 0, 0, 4)
 	healthBar.AnchorPoint = Vector2.new(0.5, 0)
@@ -94,6 +100,7 @@ local function createElements(player)
 	
 	local scroller = Instance.new("ScrollingFrame", state.main)
 	scroller.Name = "Backpack"
+	-- FIX: Adjusted to fit below the new healthbar position
 	scroller.Size = UDim2.new(1, -10, 1, -18)
 	scroller.Position = UDim2.new(0.5, 0, 1, -4)
 	scroller.AnchorPoint = Vector2.new(0.5, 1)
@@ -151,6 +158,7 @@ local function updateUI(player, char)
 	end
 end
 
+--// main loop
 rs.Heartbeat:Connect(function()
 	if not _G.BillboardState.enabled then return end
 	local localChar = lp.Character
@@ -186,6 +194,7 @@ rs.Heartbeat:Connect(function()
 	end
 end)
 
+--// controller & cleanup
 uis.InputChanged:Connect(function(input)
 	if not _G.BillboardState.enabled or not _G.BillboardState.activeScroller then return end
 	if input.UserInputType == Enum.UserInputType.Gamepad1 and input.KeyCode == Enum.KeyCode.Gamepad1_Thumbstick2 then
