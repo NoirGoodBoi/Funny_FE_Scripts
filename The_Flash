@@ -1,0 +1,30 @@
+--[[
+    REVERSE FLASH SCRIPT - MULTIPLAYER VERSION
+    
+    PC CONTROLS:
+    Q = Speed Mode (Enable/Disable)
+    C = Phase Mode (Enable/Disable)
+    B = Angular Mirage (Enable/Disable)
+    X = Disable All Effects
+    
+    SPEEDSTER STATES & COLORS:
+    RF          - Red Lightning (Reverse Flash)
+    Zoom        - Blue Lightning (Zoom/Hunter Zolomon)
+    KidFlash    - Yellow Lightning (Kid Flash/Wally West CW)
+    GodOfSpeed  - White/Silver Lightning (Savitar/God of Speed)
+    NWA         - Purple Lightning (Nora West Allen)
+    Regular     - Orange Lightning (The Flash)
+    
+    CONFIGURATION:
+--]]
+
+_G.NightMode = false  -- Set to true for night mode, false for day mode
+_G.TODC = false       -- TimeOfDayChange: Set to false to not change the timeofday
+
+AllowedPlayers = {
+    ["Player1Username"] = "RF", -- change this to be your username
+    ["Player2Username"] = "Zoom", -- change this to be your friends username
+    ["Player3Username"] = "Regular" -- change this to be your username
+}
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NetlessScripter/Reverse-Flash/refs/heads/main/Open%20Sourced%20Version"))()
